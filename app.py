@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -10,8 +10,10 @@ def home():
 def games():
     return render_template("games.html")
 
-@app.route("/add")
+@app.route("/add", methods=["GET", "POST"])
 def add_game():
+    if request.method == "POST":
+        return "Form submitted"
     return render_template("add.html")
 
 @app.route("/remove")
