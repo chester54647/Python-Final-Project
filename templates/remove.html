@@ -4,7 +4,10 @@
     <h2>Remove a Game</h2>
     {% if games %}
         {% for game in games %}
-            <div>
+            <div class="game-card">
+                {% if game.image %}
+                    <img src="{{ url_for('static', filename='uploads/' + game.image) }}">
+                {% endif %}
                 <p><strong>Title:</strong> {{ game.title }}</p>
                 <p><strong>Genre:</strong> {{ game.genre }}</p>
                 <p><strong>Platform:</strong> {{ game.platform }}</p>

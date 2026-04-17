@@ -48,7 +48,7 @@ def add_game():
         if image.filename == "":
             return "Please choose an image file."
 
-        if allowed_file(image.filename) == False:
+        if not allowed_file(image.filename):
             return "Only jpg, jpeg, png, and gif files are allowed."
 
         image_name = image.filename
@@ -78,7 +78,10 @@ def remove_game():
 
         if game_index is not None:
             games = session["games"]
-            games.pop(int(game_index))
+            index = int(game_index)
+
+            if index >= 0 and index < len(games):
+                games.pop(index)
             session["games"] = games
 
         return redirect(url_for("remove_game"))

@@ -92,3 +92,25 @@ img {
 p {
     line-height: 1.5;
 }
+
+.game-card {
+    background-color: white;
+    width: 70%;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.game-card img {
+    max-width: 150px;
+    border-radius: 6px;
+}
+
+.game-card p {
+    margin: 5px 0;
+}
