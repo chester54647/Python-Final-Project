@@ -6,6 +6,10 @@
     {% if games %}
         {% for game in games %}
             <div>
+                {% if game.image %}
+                    <img src="{{ url_for('static', filename='uploads/' + game.image) }}" width="200"><br>
+                {% endif %}
+
                 <p><strong>Title:</strong> {{ game.title }}</p>
                 <p><strong>Genre:</strong> {{ game.genre }}</p>
                 <p><strong>Platform:</strong> {{ game.platform }}</p>

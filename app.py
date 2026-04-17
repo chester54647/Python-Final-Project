@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
+import os
 
 app = Flask(__name__)
+app.config["UPLOAD_FOLDER"] = "static/uploads"
 
 games_list = []
 
@@ -19,11 +21,21 @@ def add_game():
         genre = request.form.get("genre")
         platform = request.form.get("platform")
         rating = request.form.get("rating")
+        image = request.files.get("image")
+
+        image_name = ""
+
+        if image:
+            image_name = image.filename
+            image_path = os.path.join(app.config["UPLOAD_FOLDER"], image_name)
+            image.save(image_path)
+
         game = {
             "title": title,
             "genre": genre,
             "platform": platform,
-            "rating": rating
+            "rating": rating,
+            "image": image_name
         }
         games_list.append(game)
 
