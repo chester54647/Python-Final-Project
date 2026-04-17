@@ -62,9 +62,17 @@ def add_game():
 
     return render_template("add.html")
 
-@app.route("/remove")
+@app.route("/remove", methods=["GET", "POST"])
 def remove_game():
-    return render_template("remove.html")
+    if request.method == "POST":
+        game_index = request.form.get("game_index")
+
+        if game_index is not None:
+            games_list.pop(int(game_index))
+
+        return redirect(url_for("remove_game"))
+
+    return render_template("remove.html", games=games_list)
 
 if __name__ == "__main__":
     app.run(debug=True)

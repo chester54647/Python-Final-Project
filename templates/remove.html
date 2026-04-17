@@ -2,5 +2,23 @@
 
 {% block content %}
     <h2>Remove a Game</h2>
-    <p>This page will allow the user to remove games.</p>
+    {% if games %}
+        {% for game in games %}
+            <div>
+                <p><strong>Title:</strong> {{ game.title }}</p>
+                <p><strong>Genre:</strong> {{ game.genre }}</p>
+                <p><strong>Platform:</strong> {{ game.platform }}</p>
+                <p><strong>Rating:</strong> {{ game.rating }}</p>
+
+                <form action="/remove" method="post">
+                    <input type="hidden" name="game_index" value="{{ loop.index0 }}">
+                    <input type="submit" value="Remove Game">
+                </form>
+
+                <hr>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No games available to remove.</p>
+    {% endif %}
 {% endblock %}
