@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import os
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "static/uploads"
+app.secret_key = "finalprojectkey"
 
-games_list = []
 
 def allowed_file(filename):
     filename = filename.lower()
@@ -26,10 +26,15 @@ def home():
 
 @app.route("/games")
 def games():
-    return render_template("games.html", games=games_list)
+    if "games" not in session:
+        session["games"] = []
+
+    return render_template("games.html", games=session["games"])
 
 @app.route("/add", methods=["GET", "POST"])
 def add_game():
+    if "games" not in session:
+        session["games"] = []
     if request.method == "POST":
         title = request.form.get("title")
         genre = request.form.get("genre")
@@ -57,22 +62,28 @@ def add_game():
             "rating": rating,
             "image": image_name
         }
-        games_list.append(game)
+        games = session["games"]
+        games.append(game)
+        session["games"] = games
         return redirect(url_for("games"))
 
     return render_template("add.html")
 
 @app.route("/remove", methods=["GET", "POST"])
 def remove_game():
+    if "games" not in session:
+        session["games"] = []
     if request.method == "POST":
         game_index = request.form.get("game_index")
 
         if game_index is not None:
-            games_list.pop(int(game_index))
+            games = session["games"]
+            games.pop(int(game_index))
+            session["games"] = games
 
         return redirect(url_for("remove_game"))
 
-    return render_template("remove.html", games=games_list)
+    return render_template("remove.html", games=session["games"])
 
 if __name__ == "__main__":
     app.run(debug=True)
