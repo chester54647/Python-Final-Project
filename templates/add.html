@@ -4,20 +4,20 @@
     <h2>Add a New Game!</h2>
         <form action="/add" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
         <label for="title">Game Title:</label><br>
-        <input type="text" id="title" name="title"><br><br>
+        <input type="text" id="title" name="title" class="form-control"><br><br>
 
         <label for="genre">Genre:</label><br>
-        <input type="text" id="genre" name="genre"><br><br>
+        <input type="text" id="genre" name="genre" class="form-control"><br><br>
 
         <label for="platform">Platform:</label><br>
-        <input type="text" id="platform" name="platform"><br><br>
+        <input type="text" id="platform" name="platform" class="form-control"><br><br>
 
         <label for="rating">Rating:</label><br>
-        <input type="text" id="rating" name="rating"><br><br>
+        <input type="text" id="rating" name="rating" class="form-control"><br><br>
 
         <label for="image">Game Image:</label><br>
         <input type="file" id="image" name="image"><br><br>
 
-        <input type="submit" value="Add Game">
+        <input type="submit" value="Add Game" class="btn btn-primary">
     </form>
 {% endblock %}

@@ -5,7 +5,7 @@
 
     {% if games %}
         {% for game in games %}
-            <div class="game-card">
+            <div class="game-card card p-3 shadow-sm">
                 {% if game.image %}
                     <img src="{{ url_for('static', filename='uploads/' + game.image) }}" width="200"><br>
                 {% endif %}
